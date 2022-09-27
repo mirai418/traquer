@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  app:
+    image: node:18-alpine
+    build: .
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 8000:${PORT}
+    working_dir: /app
+    volumes:
+      - ./:/app
+    depends_on:
+      - database
+    environment:
+      NODE_ENV: ${ENV}
+      PORT: ${PORT}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  database:
+    image: postgres:14.5-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - award-seat-tracker-postgres-data:/var/lib/postgresql/data
+      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+volumes:
+  award-seat-tracker-postgres-data:
+
+# healthcheck:
+#   test: ["CMD-SHELL", "pg_isready -U postgres"]
+#   interval: 5s
+#   timeout: 5s
+#   retries: 5

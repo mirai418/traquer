@@ -1,0 +1,38 @@
+{
+  "name": "award-seat-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "exports": "./index.js",
+  "engines": {
+    "node": ">=18.7.0"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "build": "npx eslint .",
+    "start": "node --loader ts-node/esm ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "lodash-es": "^4.17.21",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.23.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^18.7.18",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "eslint": "^8.23.1",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  }
+}
