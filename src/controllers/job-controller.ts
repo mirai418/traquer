@@ -1,6 +1,7 @@
 import express from 'express';
 import refreshData from '../jobs/refresh-data.js';
 import checkSubscriptions from '../jobs/check-subscriptions.js';
+import { isUndefined } from 'lodash-es';
 
 class JobController {
   public path = '/jobs';
@@ -16,23 +17,17 @@ class JobController {
 
   post = async (request: express.Request, response: express.Response) => {
     try {
+      let result;
       if (request.body.name === 'refresh-data') {
-        await refreshData();
-        response.json({
-          executed: true,
-          success: true,
-        });
+        result = await refreshData();
       } else if (request.body.name === 'check-subscriptions') {
-        await checkSubscriptions();
-        response.json({
-          executed: true,
-          success: true,
-        });
-      } else {
-        response.json({
-          executed: false,
-        });
+        result = await checkSubscriptions();
       }
+      response.json({
+        executed: !isUndefined(result),
+        success: true,
+        result: result,
+      });
     } catch (error: any) {
       console.log(error.stack);
       response.json({

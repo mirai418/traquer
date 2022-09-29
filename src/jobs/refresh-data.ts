@@ -32,8 +32,11 @@ async function refreshData(statuses?: Status[], seats? : Seat[], regions?: Regio
     }
   }
 
-  const endTime = new Date().getTime();
-  console.log(`--> refreshData:refreshData | done. Took: ${endTime - startTime}ms.`);
+  const duration = new Date().getTime() - startTime;
+  console.log(`--> refreshData:refreshData | done. Took: ${duration}ms.`);
+  return {
+    duration: duration,
+  };
 }
 
 export default refreshData;

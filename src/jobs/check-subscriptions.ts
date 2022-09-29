@@ -29,21 +29,31 @@ async function checkSubscription(subscription: Subscription) {
     where: whereOptions,
     order: [['date', 'ASC']],
   });
-  console.log(`--> checkSubscriptions:checkSubscriptions | ${updates.length} update(s) found on Subscription: ` + await stringify(subscription));
+  const subscriptionText = `${updates.length} update(s) found on Subscription: ` + await stringify(subscription);
+  console.log(`--> checkSubscriptions:checkSubscriptions | ${subscriptionText}`);
+  const updateTexts = [];
   for (let i = 0; i < updates.length; i++) {
-    console.log(`--> checkSubscriptions:checkSubscriptions | ` + await stringify(updates[i]));
+    const updateText = await stringify(updates[i]);
+    console.log(`--> checkSubscriptions:checkSubscriptions | ` + updateText);
+    updateTexts.push(updateText);
   }
   await subscription.update({
     lastCheckedAt: new Date(),
   });
+  return {
+    subscription: subscriptionText,
+    updates: updateTexts,
+  };
 }
 
 async function checkSubscriptions() {
   const subscriptions = await Subscription.findAll();
+  const results = [];
   for (let i = 0; i < subscriptions.length; i++) {
-    await checkSubscription(subscriptions[i]);
+    results.push(await checkSubscription(subscriptions[i]));
   }
   console.log(`--> checkSubscriptions:checkSubscriptions | done.`);
+  return results;
 }
 
 export default checkSubscriptions;
