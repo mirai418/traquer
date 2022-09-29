@@ -26,11 +26,10 @@ async function stringify(obj: Subscription | AwardSeat) {
   text += !isNil(obj.statusId) ? `for ${find(statuses, {id: obj.statusId})?.name} members ` : '';
   text += !isNil(obj.seatId) ? `in ${find(seats, {id: obj.seatId})?.name} class ` : '';
   if (obj instanceof Subscription) {
-    text += 'tracking ';
+    text += !isNil(obj.availabilityId) ? `tracking ${find(availabilities, {id: obj.availabilityId})?.name}` : '';
   } else if (obj instanceof AwardSeat) {
-    text += 'now ';
+    text += !isNil(obj.availabilityId) ? `now ${find(availabilities, {id: obj.availabilityId})?.name}` : '';
   }
-  text += !isNil(obj.availabilityId) ? `${find(availabilities, {id: obj.availabilityId})?.name}` : '';
   return trim(text);
 }
 
