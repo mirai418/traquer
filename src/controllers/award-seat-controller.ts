@@ -28,7 +28,6 @@ class AwardSeatController {
   private parseRequest(queryObj: AwardSeatQuery): WhereOptions<AwardSeat> {
     const whereOptions: WhereOptions<AwardSeat> = omitBy({
       id: splitOrUndefined(queryObj.id),
-      date: splitOrUndefined(queryObj.date),
       routeFrom: splitOrUndefined(queryObj.routeFrom),
       routeTo: splitOrUndefined(queryObj.routeTo),
       regionId: splitOrUndefined(queryObj.regionId),
@@ -37,9 +36,15 @@ class AwardSeatController {
       availabilityId: splitOrUndefined(queryObj.availabilityId),
       isLatest: true,
     }, isNil);
-    if (queryObj.dateFrom && queryObj.dateTo) {
+    if (queryObj.date) {
+      whereOptions.date = splitOrUndefined(queryObj.date);
+    } else if (queryObj.dateFrom && queryObj.dateTo) {
       whereOptions.date = {
         [Op.between]: [new Date(queryObj.dateFrom || ''), new Date(queryObj.dateTo || '')],
+      };
+    } else {
+      whereOptions.date = {
+        [Op.gte]: new Date(),
       };
     }
     return whereOptions;
@@ -57,6 +62,7 @@ class AwardSeatController {
     try {
       const result = await AwardSeat.findAll({
         where: this.parseRequest(request.query),
+        order: [['date', 'ASC']],
         limit: 1000,
       });
       response.json(result);
