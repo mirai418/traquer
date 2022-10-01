@@ -26,7 +26,6 @@ services:
       - 5432:5432
     volumes:
       - award-seat-tracker-postgres-data:/var/lib/postgresql/data
-      - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
