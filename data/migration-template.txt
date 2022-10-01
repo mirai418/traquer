@@ -1,0 +1,14 @@
+import { curryRight } from 'lodash-es';
+import { DataTypes, QueryInterface } from 'sequelize';
+import snakecaseKeys from 'snakecase-keys';
+const shallowSnakecaseKeys = curryRight(snakecaseKeys)({deep: false});
+
+async function up({context: queryInterface}: {context: QueryInterface}) {
+
+}
+
+async function down({context: queryInterface}: {context: QueryInterface}) {
+
+}
+
+export {up, down};
