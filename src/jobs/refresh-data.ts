@@ -10,7 +10,8 @@ async function sleep(milliseconds: number) {
 }
 
 async function refreshData(statuses?: Status[], seats? : Seat[], regions?: Region[]) {
-  const startTime = new Date().getTime();
+  const startTime = new Date();
+  console.log(`--> refreshData | starting: ${startTime} (${startTime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })} JST).`);
   [statuses, seats, regions] = await Promise.all([
     statuses || await Status.findAll(),
     seats || await Seat.findAll(),
@@ -32,8 +33,9 @@ async function refreshData(statuses?: Status[], seats? : Seat[], regions?: Regio
     }
   }
 
-  const duration = new Date().getTime() - startTime;
-  console.log(`--> refreshData:refreshData | done. Took: ${duration}ms.`);
+  const endTime = new Date();
+  const duration = endTime.getTime() - startTime.getTime();
+  console.log(`--> refreshData | done: ${endTime} (${endTime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })} JST). Took: ${duration}ms.`);
   return {
     duration: duration,
   };

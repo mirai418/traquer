@@ -47,12 +47,17 @@ async function checkSubscription(subscription: Subscription) {
 }
 
 async function checkSubscriptions() {
+  const startTime = new Date();
+  console.log(`--> checkSubscriptions | starting: ${startTime} (${startTime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })} JST).`);
   const subscriptions = await Subscription.findAll();
   const results = [];
   for (let i = 0; i < subscriptions.length; i++) {
     results.push(await checkSubscription(subscriptions[i]));
   }
-  console.log(`--> checkSubscriptions:checkSubscriptions | done.`);
+
+  const endTime = new Date();
+  const duration = endTime.getTime() - startTime.getTime();
+  console.log(`--> checkSubscriptions | done: ${endTime} (${endTime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })} JST). Took: ${duration}ms.`);
   return results;
 }
 
