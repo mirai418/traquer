@@ -5,8 +5,8 @@ import AwardSeat from '../models/award-seat.js';
 import Subscription from '../models/subscription.js';
 import { stringify } from '../utils/printer.js';
 
-function isNilOrEmpty(val: any) {
-  return (isArray(val) || isPlainObject(val)) ? (Object.keys(val).length + Object.getOwnPropertySymbols(val).length) === 0 : isNil(val);
+function isNilOrEmpty<T>(val: T): boolean {
+  return (isArray(val) || isPlainObject(val)) ? (Object.keys(<[] | object>val).length + Object.getOwnPropertySymbols(val).length) === 0 : isNil(val);
 }
 
 async function checkSubscription(subscription: Subscription) {
