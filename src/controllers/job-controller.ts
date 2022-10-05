@@ -17,7 +17,7 @@ class JobController implements Controller {
     this.router.post(this.path, this.post);
   }
 
-  post = async (request: express.Request, response: express.Response) => {
+  public async post(request: express.Request, response: express.Response) {
     try {
       let result;
       if (request.body.name === 'refresh-data') {
@@ -36,7 +36,7 @@ class JobController implements Controller {
         success: false,
       });
     }
-  };
+  }
 
 }
 

@@ -15,7 +15,7 @@ class SeatController implements Controller {
     this.router.get(this.path, this.get);
   }
 
-  get = async (request: express.Request, response: express.Response) => {
+  public async get(request: express.Request, response: express.Response) {
     try {
       const result = await Seat.findAll();
       response.json(result);
@@ -25,7 +25,7 @@ class SeatController implements Controller {
         message: 'something went wrong',
       });
     }
-  };
+  }
 
 }
 

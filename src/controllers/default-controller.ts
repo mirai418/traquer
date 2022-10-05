@@ -14,11 +14,12 @@ class DefaultController implements Controller {
     this.router.get(this.path, this.get);
   }
 
-  get = (request: express.Request, response: express.Response) => {
+  public get(request: express.Request, response: express.Response) {
     response.json({
       message: `Hello World! The time now is ${new Date()}`,
     });
-  };
+  }
+
 }
 
 export default DefaultController;

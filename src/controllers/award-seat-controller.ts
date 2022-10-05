@@ -59,7 +59,7 @@ class AwardSeatController implements Controller {
     this.router.get(this.path, this.get);
   }
 
-  get = async (request: express.Request, response: express.Response) => {
+  public async get(request: express.Request, response: express.Response) {
     try {
       const result = await AwardSeat.findAll({
         where: this.parseRequest(request.query),
@@ -73,7 +73,7 @@ class AwardSeatController implements Controller {
         message: 'something went wrong',
       });
     }
-  };
+  }
 
 }
 

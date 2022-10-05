@@ -16,7 +16,7 @@ class SubscriptionController implements Controller {
     this.router.post(this.path, this.post);
   }
 
-  get = async (request: express.Request, response: express.Response) => {
+  public async get(request: express.Request, response: express.Response) {
     try {
       const result = await Subscription.findAll();
       response.json(result);
@@ -26,9 +26,9 @@ class SubscriptionController implements Controller {
         message: 'something went wrong',
       });
     }
-  };
+  }
 
-  post = async (request: express.Request, response: express.Response) => {
+  public async post(request: express.Request, response: express.Response) {
     try {
       const result = await Subscription.create(request.body);
       response.json(result);
@@ -38,7 +38,7 @@ class SubscriptionController implements Controller {
         message: 'something went wrong',
       });
     }
-  };
+  }
 
 }
 
