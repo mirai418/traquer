@@ -1,8 +1,9 @@
 import express from 'express';
 
+import Controller from './controller-interface.js';
 import Status from '../models/status.js';
 
-class StatusController {
+class StatusController implements Controller {
   public path = '/statuses';
   public router = express.Router();
 

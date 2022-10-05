@@ -1,6 +1,8 @@
 import express from 'express';
 
-class DefaultController {
+import Controller from './controller-interface.js';
+
+class DefaultController implements Controller {
   public path = '/';
   public router = express.Router();
 

@@ -1,9 +1,11 @@
 import express from 'express';
-import refreshData from '../jobs/refresh-data.js';
-import checkSubscriptions from '../jobs/check-subscriptions.js';
 import { isUndefined } from 'lodash-es';
 
-class JobController {
+import Controller from './controller-interface.js';
+import refreshData from '../jobs/refresh-data.js';
+import checkSubscriptions from '../jobs/check-subscriptions.js';
+
+class JobController implements Controller {
   public path = '/jobs';
   public router = express.Router();
 

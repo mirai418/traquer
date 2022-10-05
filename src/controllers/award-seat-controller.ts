@@ -2,6 +2,7 @@ import express from 'express';
 import { Op, WhereOptions } from 'sequelize';
 import { omitBy, isNil } from 'lodash-es';
 
+import Controller from './controller-interface.js';
 import AwardSeat from '../models/award-seat.js';
 
 interface AwardSeatQuery {
@@ -21,7 +22,7 @@ function splitOrUndefined(str: string | undefined): string[] | undefined {
   return str ? str.split(',') : undefined;
 }
 
-class AwardSeatController {
+class AwardSeatController implements Controller {
   public path = '/award-seats';
   public router = express.Router();
 

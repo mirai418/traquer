@@ -1,8 +1,9 @@
 import express from 'express';
 
+import Controller from './controller-interface.js';
 import Availability from '../models/availability.js';
 
-class AvailabilityController {
+class AvailabilityController implements Controller {
   public path = '/availabilities';
   public router = express.Router();
 

@@ -1,8 +1,9 @@
 import express from 'express';
 
+import Controller from './controller-interface.js';
 import Subscription from '../models/subscription.js';
 
-class SubscriptionController {
+class SubscriptionController implements Controller {
   public path = '/subscriptions';
   public router = express.Router();
 

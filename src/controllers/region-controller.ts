@@ -1,8 +1,9 @@
 import express from 'express';
 
+import Controller from './controller-interface.js';
 import Region from '../models/region.js';
 
-class RegionController {
+class RegionController implements Controller {
   public path = '/regions';
   public router = express.Router();
 

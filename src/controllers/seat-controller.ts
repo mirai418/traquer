@@ -1,8 +1,9 @@
 import express from 'express';
 
+import Controller from './controller-interface.js';
 import Seat from '../models/seat.js';
 
-class SeatController {
+class SeatController implements Controller {
   public path = '/seats';
   public router = express.Router();
 
