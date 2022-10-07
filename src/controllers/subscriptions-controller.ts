@@ -8,10 +8,10 @@ class SubscriptionController implements Controller {
   public router = express.Router();
 
   constructor() {
-    this.intializeRoutes();
+    this.initializeRoutes();
   }
 
-  public intializeRoutes() {
+  public initializeRoutes() {
     this.router.get(this.path, this.get);
     this.router.post(this.path, this.post);
   }

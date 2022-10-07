@@ -52,10 +52,10 @@ class AwardSeatController implements Controller {
   }
 
   constructor() {
-    this.intializeRoutes();
+    this.initializeRoutes();
   }
 
-  public intializeRoutes() {
+  public initializeRoutes() {
     this.router.get(this.path, this.get);
   }
 

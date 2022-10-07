@@ -7,10 +7,10 @@ class DefaultController implements Controller {
   public router = express.Router();
 
   constructor() {
-    this.intializeRoutes();
+    this.initializeRoutes();
   }
 
-  public intializeRoutes() {
+  public initializeRoutes() {
     this.router.get(this.path, this.get);
   }
 
