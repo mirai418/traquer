@@ -1,5 +1,9 @@
+import { difference, isEmpty } from 'lodash-es';
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import { NotUpdatableFieldError } from '../config/errors.js';
 import sequelize from '../config/sequelize.js';
+
+const restrictedUpdatableFields = ['name'];
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
@@ -9,6 +13,17 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare isAdmin: boolean;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+
+  async updateRestricted(fields: object) {
+    this.set(fields);
+    const changed = this.changed();
+    if (isEmpty(difference(changed || [], restrictedUpdatableFields)))
+      await this.save();
+    else {
+      throw new NotUpdatableFieldError();
+    }
+  }
+
 }
 
 User.init({
