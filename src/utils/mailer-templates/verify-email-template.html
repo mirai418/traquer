@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <title>Verify your email address to continue with traquer!</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e1e1e1;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      font-family: Geneva, Tahoma, Verdana, sans-serif;
+      color: #4f4f4f;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 100;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 300;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 300;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 18px;
+    }
+
+    .vertical-margin-small {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .vertical-margin-medium {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .vertical-margin-large {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .vertical-margin-x-large {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .horizontal-margin-small {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .horizontal-margin-medium {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .horizontal-margin-large {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .horizontal-margin-x-large {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    .vertical-padding-small {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .vertical-padding-medium {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .vertical-padding-large {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .vertical-padding-x-large {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .horizontal-padding-small {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .horizontal-padding-medium {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .horizontal-padding-large {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .horizontal-padding-x-large {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    img {
+      line-height: 100%;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
+
+    a img {
+      border: none;
+    }
+
+    a,
+    a:link {
+      color: #2696FF;
+      text-decoration: underline;
+    }
+
+    table td {
+      border-collapse: collapse;
+    }
+
+    span {
+      color: inherit;
+      border-bottom: none;
+    }
+
+    span:hover {
+      background-color: transparent;
+    }
+
+    .scalable-image img {
+      max-width: 100% !important;
+      height: auto !important
+    }
+
+    .button {
+      background-color: #2696FF;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    a.button,
+    a.button:link {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    div.pre-header {
+      display: none !important;
+    }
+
+    .logo {
+      display: block;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .main-content-background {
+      background-color: #ffffff;
+    }
+
+    .section {
+      max-width: 640px;
+    }
+
+    .footer {
+      color: #8f8f8f;
+    }
+
+    @media only screen and (max-width: 424px) {
+
+      h1 {
+      font-size: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      p {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .vertical-margin-small {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      .vertical-margin-medium {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .vertical-margin-large {
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .vertical-margin-x-large {
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .horizontal-margin-small {
+        margin-left: 3px;
+        margin-right: 3px;
+      }
+
+      .horizontal-margin-medium {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .horizontal-margin-large {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+
+      .horizontal-margin-x-large {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+
+      .vertical-padding-small {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+
+      .vertical-padding-medium {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      .vertical-padding-large {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .vertical-padding-x-large {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      .horizontal-padding-small {
+        padding-left: 3px;
+        padding-right: 3px;
+      }
+
+      .horizontal-padding-medium {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      .horizontal-padding-large {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .horizontal-padding-x-large {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <div class="pre-header">Verify your email address to continue with traquer!</div>
+  <table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td align="center" valign="top" width="100%">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="section header vertical-padding-medium horizontal-padding-small" align="left">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><a href="${urls.base}">
+                    <img class="logo vertical-margin-medium horizontal-margin-medium" src="${urls.logo}" alt="traquer" width="60" height="60"></a>
+                  </td>
+                  <td>
+                    <h1 class="horizontal-margin-medium">traquer</h1>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="section main" align="center">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="main-content-background vertical-padding-x-large">
+                    <table cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td class="main-cell"><h2>Welcome to traquer${name ? ' ' + name : ''}!</h2></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td class="main-cell">
+                                <p class="vertical-margin-medium">
+                                  We need to verify that you own this email address in order for you to continue with Traquer.
+                                </p>
+                                <p class="vertical-margin-medium">
+                                  Click the link below to confirm and verify your email address.
+                                </p>
+                                <p class="vertical-margin-medium">
+                                  Do not recall logging in to traquer? <b>Do NOT</b> click the link and ignore this email.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td>
+                                <p class="vertical-margin-large"><a href="${urls.base}/auth?token=${token}" class="button">Click here to Verify</a></p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <p class="vertical-margin-large">See you soon!</p>
+                          <p>Thanks,</p>
+                          <p><a href="${urls.base}">traquer</a></p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="section footer" align="center">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center" class="vertical-padding-x-large horizontal-padding-x-large">
+                    <p class="vertical-margin-medium"><small>You're receiving this email because you signed up for or logged into traquer.</small></p>
+                    <p class="vertical-margin-medium"><small>If you do not recall, simply ignore this email.</small></p>
+                    <p class="vertical-margin-medium"><small>This is not a subscription email.</small></p>
+                    <p class="vertical-margin-large"><small><a href="${urls.base}"><img class="logo" src="${urls.logo}" alt="traquer" width="60" height="60"></a></small></p>
+                    <p class="vertical-margin-medium"><small>
+                      <strong><a href="#" target="_blank">Donate to Help</a></strong>
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                      <strong><a href="#" target="_blank">Contact Us</a></strong>
+                    </small></p>
+                    <p class="vertical-margin-large"><small>Made with love in Tokyo, Japan!</small></p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

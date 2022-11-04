@@ -10,6 +10,7 @@ import RegionController from './controllers/region-controller.js';
 import AvailabilityController from './controllers/availabilities-controller.js';
 import SubscriptionsController from './controllers/subscriptions-controller.js';
 import JobController from './controllers/job-controller.js';
+import AuthController from './controllers/auth-controller.js';
 
 const PORT = Number(process.env.PORT) || 8000;
 const app = new App(PORT,
@@ -22,6 +23,7 @@ const app = new App(PORT,
     new AvailabilityController(),
     new SubscriptionsController(),
     new JobController(),
+    new AuthController(),
   ]
 );
 
