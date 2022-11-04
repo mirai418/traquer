@@ -1,5 +1,7 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../config/sequelize.js';
+import Seat from './seat.js';
+import Status from './status.js';
 
 class AwardSeat extends Model<InferAttributes<AwardSeat>, InferCreationAttributes<AwardSeat>> {
   declare id: CreationOptional<number>;
@@ -13,6 +15,13 @@ class AwardSeat extends Model<InferAttributes<AwardSeat>, InferCreationAttribute
   declare isLatest: CreationOptional<boolean>;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
+
+  async humanize() {
+    const seat = await Seat.findByPk(this.seatId);
+    const status = await Status.findByPk(this.statusId);
+    return `${this.routeFrom} →  ${this.routeTo} on ${this.date} for ${seat?.name} Class (${status?.name} Members)`;
+  }
+
 }
 
 AwardSeat.init({
