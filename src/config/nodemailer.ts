@@ -20,4 +20,4 @@ function getTransporter() {
   return transporter || createTransporter();
 }
 
-export {createTransporter, getTransporter };
+export { createTransporter, getTransporter };
