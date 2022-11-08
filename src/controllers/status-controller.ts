@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 
 import Controller from './controller-interface.js';
 import Status from '../models/status.js';
@@ -15,15 +15,12 @@ class StatusController implements Controller {
     this.router.get(this.path, this.get);
   }
 
-  public async get(request: express.Request, response: express.Response) {
+  public async get(request: Request, response: Response, next: NextFunction) {
     try {
       const result = await Status.findAll();
       response.json(result);
-    } catch (error: any) {
-      console.log(error.stack);
-      response.status(502).json({
-        message: 'something went wrong',
-      });
+    } catch (error) {
+      next(error);
     }
   }
 

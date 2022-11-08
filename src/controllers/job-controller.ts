@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { isUndefined } from 'lodash-es';
 
 import Controller from './controller-interface.js';
@@ -17,7 +17,7 @@ class JobController implements Controller {
     this.router.post(this.path, this.post);
   }
 
-  public async post(request: express.Request, response: express.Response) {
+  public async post(request: Request, response: Response) {
     try {
       let result;
       if (request.body.name === 'refresh-data') {
@@ -30,8 +30,7 @@ class JobController implements Controller {
         success: true,
         result: result,
       });
-    } catch (error: any) {
-      console.log(error.stack);
+    } catch (error) {
       response.json({
         success: false,
       });

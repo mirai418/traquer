@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 
 import Controller from './controller-interface.js';
 import Subscription from '../models/subscription.js';
@@ -16,27 +16,21 @@ class SubscriptionController implements Controller {
     this.router.post(this.path, this.post);
   }
 
-  public async get(request: express.Request, response: express.Response) {
+  public async get(request: Request, response: Response, next: NextFunction) {
     try {
       const result = await Subscription.findAll();
       response.json(result);
-    } catch (error: any) {
-      console.log(error.stack);
-      response.status(502).json({
-        message: 'something went wrong',
-      });
+    } catch (error) {
+      next(error);
     }
   }
 
-  public async post(request: express.Request, response: express.Response) {
+  public async post(request: Request, response: Response, next: NextFunction) {
     try {
       const result = await Subscription.create(request.body);
       response.json(result);
-    } catch (error: any) {
-      console.log(error.stack);
-      response.status(502).json({
-        message: 'something went wrong',
-      });
+    } catch (error) {
+      next(error);
     }
   }
 
