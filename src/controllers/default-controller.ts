@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 import Controller from './controller-interface.js';
 
@@ -14,7 +14,7 @@ class DefaultController implements Controller {
     this.router.get(this.path, this.get);
   }
 
-  public get(request: express.Request, response: express.Response) {
+  public async get(request: Request, response: Response) {
     response.json({
       message: `Hello World! The time now is ${new Date()}`,
     });
