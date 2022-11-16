@@ -1,5 +1,6 @@
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../config/sequelize.js';
+import User from './user.js';
 
 class Subscription extends Model<InferAttributes<Subscription>, InferCreationAttributes<Subscription>> {
   declare id: CreationOptional<number>;
@@ -11,6 +12,7 @@ class Subscription extends Model<InferAttributes<Subscription>, InferCreationAtt
   declare seatId: number | null;
   declare availabilityId: number | null;
   declare lastCheckedAt: Date;
+  declare userId: number;
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
 }
@@ -55,6 +57,10 @@ Subscription.init({
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   createdAt: DataTypes.DATE,
   updatedAt: DataTypes.DATE,
 }, {
@@ -64,5 +70,17 @@ Subscription.init({
   timestamps: true,
   underscored: true,
 });
+
+User.hasMany(Subscription, {
+  as: 'subscriptions',
+});
+Subscription.belongsTo(User, {
+  as: 'user',
+  foreignKey: {
+    name: 'userId',
+    allowNull: false,
+  },
+});
+Subscription.removeAttribute('UserId');
 
 export default Subscription;
