@@ -5,7 +5,12 @@ import Controller from './controller-interface.js';
 import User from '../models/user.js';
 import { NotUpdatableFieldError } from '../config/errors.js';
 import { authMiddleware, RequestWithUser } from '../middlewares/auth-middleware.js';
+import Subscription from '../models/subscription.js';
 
+const includeSubscriptionsObj = {
+  model: Subscription,
+  as: 'subscriptions',
+};
 
 class UserController implements Controller {
   public path = '/users';
@@ -27,7 +32,10 @@ class UserController implements Controller {
 
   public async get(request: Request, response: Response, next: NextFunction) {
     try {
+      const doInclude = (request.query.include as string || '').split(',').includes('subscriptions');
+      delete request.query.include;
       const result = await User.findAll({
+        include: doInclude ? includeSubscriptionsObj : undefined,
         where: request.query,
       });
       response.json(result);
@@ -93,7 +101,12 @@ class UserController implements Controller {
 
   public async getMe(request: Request, response: Response, next: NextFunction) {
     try {
-      response.json((request as RequestWithUser).user);
+      const doInclude = (request.query.include as string || '').split(',').includes('subscriptions');
+      delete request.query.include;
+      const user = await User.findByPk((request as RequestWithUser).user.id, {
+        include: doInclude ? includeSubscriptionsObj : undefined,
+      });
+      response.json(user);
     } catch (error) {
       next(error);
     }
