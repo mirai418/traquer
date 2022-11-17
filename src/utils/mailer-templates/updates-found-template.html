@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <title>${updatesCount} update${updatesCount > 1 ? 's' : ''} found for your traquer subscriptions!</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #e1e1e1;
+      -webkit-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      font-family: Geneva, Tahoma, Verdana, sans-serif;
+      color: #4f4f4f;
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 100;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 300;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 300;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 18px;
+    }
+
+    .vertical-margin-small {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .vertical-margin-medium {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .vertical-margin-large {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .vertical-margin-x-large {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .horizontal-margin-small {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .horizontal-margin-medium {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .horizontal-margin-large {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    .horizontal-margin-x-large {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    .vertical-padding-small {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+
+    .vertical-padding-medium {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .vertical-padding-large {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .vertical-padding-x-large {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .horizontal-padding-small {
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .horizontal-padding-medium {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .horizontal-padding-large {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .horizontal-padding-x-large {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    img {
+      line-height: 100%;
+      outline: none;
+      text-decoration: none;
+      -ms-interpolation-mode: bicubic;
+    }
+
+    a img {
+      border: none;
+    }
+
+    a,
+    a:link {
+      color: #2696FF;
+      text-decoration: underline;
+    }
+
+    table td {
+      border-collapse: collapse;
+    }
+
+    span {
+      color: inherit;
+      border-bottom: none;
+    }
+
+    span:hover {
+      background-color: transparent;
+    }
+
+    .scalable-image img {
+      max-width: 100% !important;
+      height: auto !important
+    }
+
+    .button {
+      background-color: #2696FF;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    a.button,
+    a.button:link {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    div.pre-header {
+      display: none !important;
+    }
+
+    .logo {
+      display: block;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .main-content-background {
+      background-color: #ffffff;
+    }
+
+    .section {
+      max-width: 640px;
+    }
+
+    .footer {
+      color: #8f8f8f;
+    }
+
+    @media only screen and (max-width: 424px) {
+
+      h1 {
+      font-size: 20px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      p {
+        font-size: 12px;
+        line-height: 14px;
+      }
+
+      .vertical-margin-small {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      .vertical-margin-medium {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .vertical-margin-large {
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .vertical-margin-x-large {
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .horizontal-margin-small {
+        margin-left: 3px;
+        margin-right: 3px;
+      }
+
+      .horizontal-margin-medium {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .horizontal-margin-large {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+
+      .horizontal-margin-x-large {
+        margin-left: 16px;
+        margin-right: 16px;
+      }
+
+      .vertical-padding-small {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+
+      .vertical-padding-medium {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      .vertical-padding-large {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .vertical-padding-x-large {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+      .horizontal-padding-small {
+        padding-left: 3px;
+        padding-right: 3px;
+      }
+
+      .horizontal-padding-medium {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      .horizontal-padding-large {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .horizontal-padding-x-large {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <div class="pre-header">${updatesCount} update${updatesCount > 1 ? 's' : ''} found for your traquer subscriptions!</div>
+  <table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td align="center" valign="top" width="100%">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="section header vertical-padding-medium horizontal-padding-small" align="left">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><a href="${urls.base}">
+                    <img class="logo vertical-margin-medium horizontal-margin-medium" src="${urls.logo}" alt="traquer" width="60" height="60"></a>
+                  </td>
+                  <td>
+                    <h1 class="horizontal-margin-medium">traquer</h1>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="section main" align="center">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="main-content-background vertical-padding-x-large">
+                    <table cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td class="main-cell"><h2>Hello ${user.name || user.email},</h2></td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td class="main-cell">
+                                <p class="vertical-margin-small">
+                                  We found ${updatesCount} update${updatesCount > 1 ? 's' : ''}
+                                  to your subscriptions since the last time we checked.
+                                </p>
+                                <p class="vertical-margin-small">
+                                  Please note that these availabilities change quickly and may not be available by the time
+                                  you book, so act quickly! For official availabilities please consult the airline's booking system.
+                                </p>
+                                <p class="vertical-margin-medium">
+                                  Visit <a href="${urls.base}">traquer</a> to see the whole suite of award seat availabilities.
+                                </p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large" style="${updates['3'] ? '' : 'display: none'}">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td><h3 class="vertical-margin-medium">${(updates['3'] || []).length} Award Seat${(updates['3'] || []).length > 1 ? 's' : ''} now Available.</h3></td>
+                            </tr>
+                            <tr>
+                              <td>${(updates['3'] || []).map((update) => '<p class="vertical-margin-small">' + update.humanized + '</p>').join('')}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large" style="${updates['2'] ? '' : 'display: none'}">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td><h3 class="vertical-margin-medium">${(updates['2'] || []).length} Award Seat${(updates['2'] || []).length > 1 ? 's' : ''} now Partially Available.</h3></td>
+                            </tr>
+                            <tr>
+                              <td>${(updates['2'] || []).map((update) => '<p class="vertical-margin-small">' + update.humanized + '</p>').join('')}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large" style="${updates['1'] ? '' : 'display: none'}">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td><h3 class="vertical-margin-medium">${(updates['1'] || []).length} Award Seat${(updates['1'] || []).length > 1 ? 's' : ''} now on the Waiting List.</h3></td>
+                            </tr>
+                            <tr>
+                              <td>${(updates['1'] || []).map((update) => '<p class="vertical-margin-small">' + update.humanized + '</p>').join('')}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large" style="${updates['0'] ? '' : 'display: none'}">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td><h3 class="vertical-margin-medium">${(updates['0'] || []).length} Award Seat${(updates['0'] || []).length > 1 ? 's' : ''} no longer Available.</h3></td>
+                            </tr>
+                            <tr>
+                              <td>${(updates['0'] || []).map((update) => '<p class="vertical-margin-small">' + update.humanized + '</p>').join('')}</td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <table cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td>
+                                <p class="vertical-margin-large"><a href="${urls.subscriptions}" class="button">Manage your subscriptions</a></p>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="vertical-padding-medium horizontal-padding-x-large">
+                          <p>Thanks,</p>
+                          <p><a href="${urls.base}">traquer</a></p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="section footer" align="center">
+              <table cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center" class="vertical-padding-x-large horizontal-padding-x-large">
+                    <p class="vertical-margin-medium"><small>You're receiving this email because you've subscribed to updates when new award seats open up on traquer. Feel like that was a mistake? Click here to <a href="{urls.unsubscribe}">unsubscribe.</a></small></p>
+                    <p class="vertical-margin-medium"><small>You can also change your individual subscriptions <a href="${urls.subscriptions}">here</a> at any time.</small></p>
+                    <p class="vertical-margin-large"><small><a href="${urls.base}"><img class="logo" src="${urls.logo}" alt="traquer" width="60" height="60"></a></small></p>
+                    <p class="vertical-margin-medium"><small>
+                      <strong><a href="#" target="_blank">Donate to Help</a></strong>
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                      <strong><a href="#" target="_blank">Contact Me</a></strong>
+                    </small></p>
+                    <p class="vertical-margin-large"><small>Made with love in Tokyo, Japan!</small></p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>
