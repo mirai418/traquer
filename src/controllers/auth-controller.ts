@@ -9,7 +9,7 @@ import { send } from '../utils/mailer.js';
 import { merge } from 'lodash-es';
 
 const VERIFICATION_TOKEN_EXPIRY = 60;
-const AUTH_TOKEN_EXPIRY = 60 * 60;
+const AUTH_TOKEN_EXPIRY = 60 * 60 * 24;
 
 class AuthController implements Controller {
   public path = '/auth';
