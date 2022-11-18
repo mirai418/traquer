@@ -91,7 +91,6 @@ class SubscriptionController implements Controller {
     try {
       const user = (request as RequestWithUser).user;
       const subscription = await Subscription.findByPk(request.params.id);
-      console.log(user.id, subscription?.userId);
       if (!subscription) {
         throw new NotFoundError();
       } else if (!user.isAdmin && (subscription.userId !== user.id)) {
