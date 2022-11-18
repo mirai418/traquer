@@ -1,7 +1,6 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
+import createHttpError from 'http-errors';
 import { isEmpty } from 'lodash-es';
-import { NotAdminError, NoUserError, TokenEmptyError } from '../config/errors.js';
 
 import { verify } from '../config/jwt.js';
 import User from '../models/user.js';
@@ -16,40 +15,20 @@ function authMiddleware(options: {isAdmin?: boolean} = {}) {
       const header = request.header('authorization') || '';
       const token = header.replace('Bearer ', '');
       if (isEmpty(token)) {
-        throw new TokenEmptyError();
+        throw new createHttpError.Unauthorized('"Authorization: Bearer" token required.');
       }
       const data = verify(token);
       const user = await User.findByPk(data.id);
       if (!user) {
-        throw new NoUserError();
+        throw new createHttpError.BadRequest('We could not figure out who you are.');
       }
       (request as RequestWithUser).user = user;
       if (options.isAdmin && !user.isAdmin) {
-        throw new NotAdminError();
+        throw new createHttpError.Forbidden('You do not have the rights to perform this request.');
       }
       next();
     } catch (error) {
-      if (error instanceof TokenEmptyError || error instanceof NoUserError) {
-        response.status(401).json({
-          message: 'Unauthorized. Authorization token is required.',
-        });
-      } else if (error instanceof jwt.TokenExpiredError) {
-        response.status(401).json({
-          message: 'Unauthorized. Authorization token is expired.',
-        });
-      } else if (error instanceof jwt.JsonWebTokenError) {
-        response.status(401).json({
-          message: 'Unauthorized. Authorization token is invalid.',
-        });
-      }  else if (error instanceof NotAdminError) {
-        response.status(403).json({
-          message: 'Forbidden. You do not have the rights to perform this request.',
-        });
-      } else {
-        response.status(500).json({
-          message: 'Unknown error in authMiddleware.',
-        });
-      }
+      next(error);
     }
   };
 }
