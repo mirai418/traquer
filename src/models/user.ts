@@ -1,6 +1,6 @@
+import createHttpError from 'http-errors';
 import { difference, isEmpty } from 'lodash-es';
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
-import { NotUpdatableFieldError } from '../config/errors.js';
 import sequelize from '../config/sequelize.js';
 
 const restrictedUpdatableFields = ['name'];
@@ -20,7 +20,7 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     if (isEmpty(difference(changed || [], restrictedUpdatableFields)))
       await this.save();
     else {
-      throw new NotUpdatableFieldError();
+      throw new createHttpError.Forbidden('You cannot update this/these fields.');
     }
   }
 

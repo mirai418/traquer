@@ -1,11 +1,11 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { DatabaseError, ValidationError } from 'sequelize';
 
 import Controller from './controller-interface.js';
 import User from '../models/user.js';
-import { NotUpdatableFieldError } from '../config/errors.js';
 import { authMiddleware, RequestWithUser } from '../middlewares/auth-middleware.js';
 import Subscription from '../models/subscription.js';
+import { clone } from 'lodash-es';
+import createHttpError from 'http-errors';
 
 const includeSubscriptionsObj = {
   model: Subscription,
@@ -21,32 +21,32 @@ class UserController implements Controller {
   }
 
   public initializeRoutes() {
-    this.router.get(this.path, authMiddleware({isAdmin: true}), this.get);
+    this.router.get(this.path, authMiddleware(), this.get);
     this.router.post(this.path, authMiddleware({isAdmin: true}), this.post);
-    this.router.patch(this.path + '/:id', authMiddleware({isAdmin: true}), this.patch);
-    this.router.delete(this.path + '/:id', authMiddleware({isAdmin: true}), this.delete);
-    this.router.get(this.path + '/me', authMiddleware(), this.getMe);
-    this.router.patch(this.path + '/me', authMiddleware(), this.patchMe);
-    this.router.delete(this.path + '/me', authMiddleware(), this.deleteMe);
+    this.router.patch(this.path + '/:id', authMiddleware(), this.patch);
+    this.router.delete(this.path + '/:id', authMiddleware(), this.delete);
   }
 
   public async get(request: Request, response: Response, next: NextFunction) {
     try {
+      const user = (request as RequestWithUser).user;
       const doInclude = (request.query.include as string || '').split(',').includes('subscriptions');
       delete request.query.include;
-      const result = await User.findAll({
-        include: doInclude ? includeSubscriptionsObj : undefined,
-        where: request.query,
-      });
-      response.json(result);
-    } catch (error) {
-      if (error instanceof DatabaseError) {
-        response.status(401).json({
-          message: 'Invalid query options.',
+      if (!user.isAdmin && request.query.id && parseInt(request.query.id as string) !== user.id) {
+        response.json([]);
+      } else  {
+        const where = clone(request.query);
+        if (!user.isAdmin) {
+          where.id = (request as RequestWithUser).user.id.toString();
+        }
+        const result = await User.findAll({
+          include: doInclude ? includeSubscriptionsObj : undefined,
+          where: where,
         });
-      } else {
-        next(error);
+        response.json(result);
       }
+    } catch (error) {
+      next(error);
     }
   }
 
@@ -55,26 +55,24 @@ class UserController implements Controller {
       const result = await User.create(request.body);
       response.json(result);
     } catch (error) {
-      if (error instanceof ValidationError) {
-        response.status(401).json({
-          message: error.message,
-        });
-      } else {
-        next(error);
-      }
+      next(error);
     }
   }
 
   public async patch(request: Request, response: Response, next: NextFunction) {
     try {
-      const user = await User.findByPk(request.params.id);
-      if (!user) {
-        response.status(404).json({
-          message: 'User not found.',
-        });
+      const user = (request as RequestWithUser).user;
+      const userToUpdate = await User.findByPk(request.params.id);
+      if (!user.isAdmin && (!userToUpdate || (user.id !== userToUpdate.id))) {
+        throw new createHttpError.Forbidden('You cannot update other Users.');
+      } else if (!userToUpdate) {
+        throw new createHttpError.NotFound('User not found.');
+      } else if (!user.isAdmin) {
+        await userToUpdate.updateRestricted(request.body);
+        response.json(userToUpdate);
       } else {
-        await user.update(request.body);
-        response.json(user);
+        await userToUpdate.update(request.body);
+        response.json(userToUpdate);
       }
     } catch (error) {
       next(error);
@@ -83,59 +81,18 @@ class UserController implements Controller {
 
   public async delete(request: Request, response: Response, next: NextFunction) {
     try {
-      const user = await User.findByPk(request.params.id);
-      if (!user) {
-        response.status(404).json({
-          message: 'User not found.',
-        });
+      const user = (request as RequestWithUser).user;
+      const userToUpdate = await User.findByPk(request.params.id);
+      if (!user.isAdmin && (!userToUpdate || (user.id !== userToUpdate.id))) {
+        throw new createHttpError.Forbidden('You cannot delete other Users.');
+      } else if (!userToUpdate) {
+        throw new createHttpError.NotFound('User not found.');
       } else {
-        await user.destroy();
+        await userToUpdate.destroy();
         response.json({
           success: true,
         });
       }
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  public async getMe(request: Request, response: Response, next: NextFunction) {
-    try {
-      const doInclude = (request.query.include as string || '').split(',').includes('subscriptions');
-      delete request.query.include;
-      const user = await User.findByPk((request as RequestWithUser).user.id, {
-        include: doInclude ? includeSubscriptionsObj : undefined,
-      });
-      response.json(user);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  public async patchMe(request: Request, response: Response, next: NextFunction) {
-    try {
-      const user = (request as RequestWithUser).user;
-      await user.updateRestricted(request.body);
-      response.json(user);
-    } catch (error) {
-      next(error);
-      if (error instanceof NotUpdatableFieldError) {
-        response.status(403).json({
-          message: 'Forbidden. You do not have the rights to update this field.',
-        });
-      } else {
-        next(error);
-      }
-    }
-  }
-
-  public async deleteMe(request: Request, response: Response, next: NextFunction) {
-    try {
-      const user = (request as RequestWithUser).user;
-      await user.destroy();
-      response.json({
-        success: true,
-      });
     } catch (error) {
       next(error);
     }
