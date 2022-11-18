@@ -4,6 +4,7 @@ import { omitBy, isNil } from 'lodash-es';
 
 import Controller from './controller-interface.js';
 import AwardSeat from '../models/award-seat.js';
+import { authMiddleware } from '../middlewares/auth-middleware.js';
 
 interface AwardSeatQuery {
   id?: string,
@@ -56,7 +57,7 @@ class AwardSeatController implements Controller {
   }
 
   public initializeRoutes() {
-    this.router.get(this.path, this.get);
+    this.router.get(this.path, authMiddleware(), this.get);
   }
 
   public async get(request: Request, response: Response, next: NextFunction) {
