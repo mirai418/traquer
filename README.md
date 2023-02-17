@@ -11,7 +11,7 @@ Written completely in Typescript and uses ts-node to run.
 
 #### Set Up
 
-Get a copy of .env from [me](https://github.com/mirai418).
+Get a copy of .env from [me](https://github.com/miraiakagawa).
 
 ```
 $ npm install
